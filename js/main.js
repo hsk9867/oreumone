@@ -31,7 +31,7 @@
   });
 
   // 쇼케이스 슬라이더: 지점별 대표 사진
-  var showList = [1, 5, 9, 12, 3, 14, 10, 8].map(function (n) { return B.find(function (b) { return b.no === n; }); }).filter(Boolean);
+  var showList = [1, 7, 11, 16, 15, 13, 14, 9].map(function (n) { return B.find(function (b) { return b.no === n; }); }).filter(Boolean);
   var track = $('#showTrack'), dots = $('#showDots'), cur = 0, timer;
   track.innerHTML = showList.map(function (b, i) {
     var hours = b.hoursShort.map(function (h) { return h[0] + ' ' + h[1]; }).join(' · ');
