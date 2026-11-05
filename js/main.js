@@ -99,7 +99,14 @@
     $('#mdAddr').textContent = b.addr;
     $('#mdHours').innerHTML = b.hours.map(function (h) { return '<li><b>' + esc(h[0]) + '</b><span>' + esc(h[1]) + '</span></li>'; }).join('') || '<li><span>네이버에 등록되지 않음</span></li>';
     $('#mdNote').textContent = b.hoursNote || '';
-    $('#mdPrices').innerHTML = b.prices.length
+    $('#mdPriceSrc').textContent = b.priceGroups ? '지점 가격표 기준' : '네이버 등록 기준';
+    $('#mdPrices').innerHTML = b.priceGroups
+      ? b.priceGroups.map(function (g) {
+          return '<li class="grp">' + esc(g.title) + '</li>' + g.items.map(function (p) {
+            return '<li class="row"><div><span>' + esc(p[0]) + '</span>' + (p[2] ? '<small>' + esc(p[2]) + '</small>' : '') + '</div>' + (p[1] ? '<b>' + esc(p[1]) + '</b>' : '') + '</li>';
+          }).join('');
+        }).join('') + (b.priceNote ? '<li class="note">' + esc(b.priceNote) + '</li>' : '')
+      : b.prices.length
       ? b.prices.map(function (p) { return '<li><span>' + esc(p[0]) + '</span><b>' + won(p[1]) + '</b></li>'; }).join('')
       : '<li><span>지점으로 문의해 주세요</span></li>';
     $('#mdBtns').innerHTML =
