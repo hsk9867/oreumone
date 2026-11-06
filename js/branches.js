@@ -167,7 +167,10 @@ window.BRANCHES = [
   ],
   "photos": [
    "b02-01.jpg",
-   "b02-02.jpg"
+   "b02-02.jpg",
+   "b02-03.jpg",
+   "b02-04.jpg",
+   "b02-05.jpg"
   ],
   "cover": "b02-01.jpg",
   "lat": "36.6510176",
