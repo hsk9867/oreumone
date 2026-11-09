@@ -97,7 +97,7 @@
     $('#mdMeta').textContent = 'BRANCH ' + no2(b.no) + ' · ' + b.gu + ' · ' + b.area;
     $('#mdName').textContent = b.name;
     $('#mdAddr').textContent = b.addr;
-    $('#mdHours').innerHTML = b.hours.map(function (h) { return '<li><b>' + esc(h[0]) + '</b><span>' + esc(h[1]) + '</span></li>'; }).join('') || '<li><span>네이버에 등록되지 않음</span></li>';
+    $('#mdHours').innerHTML = (b.hoursShort || b.hours).map(function (h) { return '<li><b>' + esc(h[0]) + '</b><span>' + esc(h[1]) + '</span></li>'; }).join('') || '<li><span>네이버에 등록되지 않음</span></li>';
     $('#mdNote').textContent = b.hoursNote || '';
     $('#mdPriceSrc').textContent = b.priceGroups ? '지점 가격표 기준' : '네이버 등록 기준';
     $('#mdPrices').innerHTML = b.priceGroups
