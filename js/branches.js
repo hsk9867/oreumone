@@ -911,9 +911,19 @@ window.BRANCHES = [
   ],
   "photos": [
    "b10-01.jpg",
-   "b10-02.jpg"
+   "b10-02.jpg",
+   "b10-03.jpg",
+   "b10-04.jpg",
+   "b10-05.jpg",
+   "b10-06.jpg",
+   "b10-07.jpg",
+   "b10-08.jpg",
+   "b10-09.jpg",
+   "b10-10.jpg",
+   "b10-11.jpg",
+   "b10-12.jpg"
   ],
-  "cover": "b10-01.jpg",
+  "cover": "b10-03.jpg",
   "lat": "36.622949",
   "lng": "127.458"
  },
@@ -1083,9 +1093,12 @@ window.BRANCHES = [
   ],
   "photos": [
    "b12-01.jpg",
-   "b12-02.jpg"
+   "b12-02.jpg",
+   "b12-03.jpg",
+   "b12-04.jpg",
+   "b12-05.jpg"
   ],
-  "cover": "b12-01.jpg",
+  "cover": "b12-02.jpg",
   "lat": "36.622364",
   "lng": "127.4840403"
  },
