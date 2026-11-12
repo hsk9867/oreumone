@@ -6,6 +6,16 @@
   var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
   var won = function (n) { return n.toLocaleString('ko-KR') + '원'; };
   var no2 = function (n) { return (n < 10 ? '0' : '') + n; };
+  // 줄바꿈 정리: " · ", " | " 로 나열된 항목을 덩어리로 묶어 항목 중간에서 줄이 바뀌지 않게 (구분자는 앞 항목 끝에 붙임)
+  var chunks = function (items, sep) {
+    return items.map(function (t, i) { return '<span class="chunk">' + esc(t) + (i < items.length - 1 ? sep : '') + '</span>'; }).join(' ');
+  };
+  [].forEach.call(document.querySelectorAll('.bn-sub, .tb-sub, .ft-info p'), function (el) {
+    if (el.children.length) return;
+    var t = el.textContent, sep = t.indexOf(' | ') > -1 ? ' |' : ' ·';
+    var parts = t.split(sep + ' ');
+    if (parts.length > 1) el.innerHTML = chunks(parts, sep);
+  });
 
   // 헤더: 스크롤 시 배경, 모바일 메뉴
   var hd = $('#hd'), gnb = $('#gnb'), menuBtn = $('#menuBtn');
@@ -22,7 +32,7 @@
   // 원형 지점 줄 (마키 루프용으로 두 번 반복)
   var circleHtml = B.map(function (b) {
     return '<a class="circle" href="#branches" data-no="' + b.no + '"><img src="' + IMG + b.cover + '" alt="" loading="lazy">' +
-      '<b>' + esc(b.name.replace('휘트니스 오름 ', '오름 ')) + '</b><small>' + esc(b.area) + '</small></a>';
+      '<b>' + esc(b.name.replace('휘트니스 오름 ', '오름 ')).replace(/GYM$/, '<wbr>GYM') + '</b><small>' + esc(b.area) + '</small></a>';
   }).join('');
   $('#circleTrack').innerHTML = circleHtml + circleHtml;
   $('#circleTrack').addEventListener('click', function (e) {
@@ -34,11 +44,11 @@
   var showList = [1, 7, 11, 16, 15, 13, 14, 9].map(function (n) { return B.find(function (b) { return b.no === n; }); }).filter(Boolean);
   var track = $('#showTrack'), dots = $('#showDots'), cur = 0, timer;
   track.innerHTML = showList.map(function (b, i) {
-    var hours = b.hoursShort.map(function (h) { return h[0] + ' ' + h[1]; }).join(' · ');
+    var hours = chunks(b.hoursShort.map(function (h) { return h[0] + ' ' + h[1]; }), ' ·');
     return '<div class="show-slide"><img src="' + IMG + b.cover + '" alt="' + esc(b.name) + ' 내부" ' + (i ? 'loading="lazy"' : '') + '>' +
       '<div class="ov"><p class="bn-kicker">BRANCH ' + no2(b.no) + '</p>' +
       '<h2 class="bn-title">' + esc(b.area) + ' 헬스장<br>' + esc(b.name) + '</h2>' +
-      '<p class="bn-sub">' + esc(hours) + '</p><p class="bn-foot">FITNESS OREUM</p></div></div>';
+      '<p class="bn-sub">' + hours + '</p><p class="bn-foot">FITNESS OREUM</p></div></div>';
   }).join('');
   dots.innerHTML = showList.map(function (_, i) { return '<button aria-label="' + (i + 1) + '번 슬라이드"></button>'; }).join('');
   var go = function (i) {
